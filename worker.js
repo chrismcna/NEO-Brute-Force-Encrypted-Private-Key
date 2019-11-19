@@ -1,10 +1,10 @@
 const { default: Neon, api, wallet, tx, rpc } = require("@cityofzion/neon-js");
 
 
-const { encryptedPrivateKey, parentPort } = require('worker_threads');
+const { workerData, parentPort } = require('worker_threads');
 
 
-var account = new wallet.Account(encryptedPrivateKey);
+var account = new wallet.Account(workerData.encryptedPrivateKey);
 
 parentPort.on('message', async message =>{
 
@@ -18,7 +18,7 @@ parentPort.on('message', async message =>{
         }
         catch(ex)
         {
-        
+
         }
 
         parentPort.postMessage({ op: "nextPassword" });

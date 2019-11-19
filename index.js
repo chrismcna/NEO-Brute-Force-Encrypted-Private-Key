@@ -1,11 +1,10 @@
 
 const { Worker } = require('worker_threads')
+const { default: Neon, api, wallet, tx, rpc } = require("@cityofzion/neon-js");
 
 
-
-
-//const passwordChars = ["a", "b", "c", "d", "e", "f", "g", "h"];
-const passwordChars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+const passwordChars = ["a", "b", "c", "d", "e", "f", "g", "h"];
+//const passwordChars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 const workerThreads = [];
 
 const encryptedPrivateKey = process.argv[2];
@@ -18,7 +17,7 @@ const main = async() =>{
 
 	for(var i = 0; i < 10; i++)
 	{
-		const worker = new Worker('./worker.js', { encryptedPrivateKey });
+		const worker = new Worker('./worker.js', { workerData:{encryptedPrivateKey} });
 		worker.on('message', message => processMessage(worker, message));
 		worker.on('error', error => console.log("error:" + error));
 		worker.on('exit', code => console.log("exit:" + code));
@@ -54,7 +53,7 @@ const processMessage = (worker, message) =>{
 
 		worker.postMessage({
 			op:"nextPassword",
-			password: passwordChars.join('')
+			password: currentPassword.join('')
 		});
 
 	}
