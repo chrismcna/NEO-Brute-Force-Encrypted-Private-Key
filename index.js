@@ -62,6 +62,7 @@ const processMessage = (worker, message) =>{
 	if (message.op == "foundPassword")
 	{
 		console.log("Password found - " + message.password);
+		process.exit(0);
 	}
 
 }
