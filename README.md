@@ -1,7 +1,7 @@
 # NEO-Brute-Force-Encrypted-Private-Key
 A Node js application that uses neon-js to brute force the password to NEO encrypted private key
 
-currently on tries characters "a-z" and "A-Z"
+currently only tries characters "a-z" and "A-Z"
 
 1: Install nodejs => 12.13.1 
 
