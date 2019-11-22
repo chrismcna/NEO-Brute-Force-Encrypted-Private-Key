@@ -19,8 +19,8 @@ const main = async() =>{
 	{
 		const worker = new Worker('./worker.js', { workerData:{encryptedPrivateKey} });
 		worker.on('message', message => processMessage(worker, message));
-		worker.on('error', error => console.log("error:" + error));
-		worker.on('exit', code => console.log("exit:" + code));
+		worker.on('error', error => {});
+		worker.on('exit', code => {});
 		workerThreads.push(worker);
 	}
 	
