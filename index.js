@@ -4,7 +4,7 @@ const { default: Neon, api, wallet, tx, rpc } = require("@cityofzion/neon-js");
 
 
 //const passwordChars = ["a", "b", "c", "d", "e", "f", "g", "h"];
-const passwordChars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+const passwordChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!@".split('');
 const workerThreads = [];
 
 const encryptedPrivateKey = process.argv[2];
@@ -50,12 +50,13 @@ const processMessage = (worker, message) =>{
 			}
 		}
 
-
+		var currentPasswordStr = currentPassword.join('')
 		worker.postMessage({
 			op:"nextPassword",
-			password: currentPassword.join('')
+			password: currentPasswordStr
 		});
-
+	
+		console.log("Trying password - " + currentPasswordStr);
 	}
 
 	if (message.op == "foundPassword")
